@@ -12,6 +12,5 @@ export const rootReducer = configureStore({
         notes: noteReducer,
         categories: categoryReducer,
     }
-
 });
 
