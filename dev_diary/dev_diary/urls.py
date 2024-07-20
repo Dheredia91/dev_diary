@@ -15,8 +15,20 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+
+"""
+By including notes.urls, we ensure that all the routes registered
+with the router in notes/urls.py are available under the api/ prefix:
+
+    http://127.0.0.1:8000/api/notes/ 
+    http://127.0.0.1:8000/api/notes/{id}/
+    http://127.0.0.1:8000/api/categories/ 
+    http://127.0.0.1:8000/api/categories/{id}/
+    
+"""
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/', include('notes.urls')),
 ]
