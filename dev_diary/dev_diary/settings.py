@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     # Your apps 
     'rest_framework',
     'notes',
+    'corsheaders',
 ]
 
 
@@ -58,6 +59,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'dev_diary.urls'
@@ -94,6 +97,14 @@ DATABASES = {
         'PORT': os.getenv('DB_PORT'),
     }
 }
+
+# CORS is a security feature implemented by web browsers to control how resources 
+# on one origin can be accessed by web pages from another origin
+# CORS Headers allow the server to specify which cross-origin requests are permitted
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+]
 
 
 # Password validation
