@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCategories } from '../slices/categorySlice';
+import AddCategory from './AddCategory';
 
 /* Categories react component, for more info see Notes.js*/
 
@@ -20,6 +21,7 @@ const Categories = () => {
   return (
     <div>
       <h1>Categories</h1>
+      <AddCategory /> 
       <ul>
         {categories.map((category) => (
           <li key={category.id}>{category.name}</li>

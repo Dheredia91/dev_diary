@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchNotes } from '../slices/noteSlice';
+import AddNote from './AddNote';
 
 const Notes = () => {
   const dispatch = useDispatch();
@@ -25,10 +26,13 @@ const Notes = () => {
   return (
     <div>
       <h1>Notes</h1>
+      <AddNote /> {/* Add the AddNote component here */}
       <ul>
         {notes.map((note) => (
           <li key={note.id}>
-            {note.title}
+            <h2>{note.title}</h2>
+            <p>{note.content}</p>
+            <p>Category: {note.category_name}</p>
           </li>
         ))}
       </ul>

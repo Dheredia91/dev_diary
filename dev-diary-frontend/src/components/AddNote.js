@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addNote } from '../slices/noteSlice';
 
 const AddNote = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const [category, setCategory] = useState('');
   const dispatch = useDispatch();
+  const categories = useSelector((state) => state.categories.categories); // Fetch categories from the state
 
   const handleSubmit = (e) => {
-    e.preventDefault(); // prevent default form submission behavior
-    dispatch(addNote({ title, content })); // dispatch addNote action with the note data
-    setTitle(''); 
-    setContent(''); 
+    e.preventDefault();
+    dispatch(addNote({ title, content, category }));
+    setTitle('');
+    setContent('');
+    setCategory('');
   };
 
   return (
@@ -29,6 +32,14 @@ const AddNote = () => {
         onChange={(e) => setContent(e.target.value)}
         required
       />
+      <select value={category} onChange={(e) => setCategory(e.target.value)} required>
+        <option value="">Select Category</option>
+        {categories.map((cat) => (
+          <option key={cat.id} value={cat.id}>
+            {cat.name}
+          </option>
+        ))}
+      </select>
       <button type="submit">Add Note</button>
     </form>
   );

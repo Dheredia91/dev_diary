@@ -1,19 +1,19 @@
 // src/slices/noteSlice.js
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import axiosInstance from '../api/axiosInstance';
 
 /* thunks wait for the API request to complete without blocking the main thread
    Dispatch Thunk -> Start Async Operation -> (Wait) -> Dispatch Success/Failure Action -> Reducer -> State Update */
 
 export const fetchNotes = createAsyncThunk('notes/fetchNotes', async () => {
-  const response = await axios.get('http://127.0.0.1:8000/api/notes/');
+  const response = await axiosInstance.get('notes/');
   return response.data;
 });
 
 // create an asynchronous thunk action for adding a note
 export const addNote = createAsyncThunk('notes/addNote', async (note) => {
   // make a POST request to the API to add a new note
-  const response = await axios.post('http://127.0.0.1:8000/api/notes/', note);
+  const response = await axiosInstance.post('notes/', note);
   return response.data; 
 });
 
@@ -43,7 +43,7 @@ const noteSlice = createSlice({
         state.error = action.error.message;
       })
       .addCase(addNote.fulfilled, (state, action) => {
-        state.notes.push(action.payload); // Add new note to notes state
+        state.notes.push(action.payload); 
       });
   },
 });

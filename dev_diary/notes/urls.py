@@ -1,6 +1,6 @@
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
-from .views import NoteViewSet, CategoryViewSet
+from .views import NoteViewSet, CategoryViewSet, RegisterViewSet
 
 
 ## DefaultRouter will automatically generate URL routes for our viewsets
@@ -13,4 +13,7 @@ router.register(r'categories', CategoryViewSet)
 # The API URLs are now determined automatically by the router
 urlpatterns = [
     path('', include(router.urls)),
+    path('register/', RegisterViewSet.as_view(), name='register'),
 ]
+
+
