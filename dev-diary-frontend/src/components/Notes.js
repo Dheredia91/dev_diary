@@ -1,4 +1,3 @@
-// src/components/Notes.js
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchNotes } from '../slices/noteSlice';

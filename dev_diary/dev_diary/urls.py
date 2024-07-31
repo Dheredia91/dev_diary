@@ -16,6 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 
 """
 By including notes.urls, we ensure that all the routes registered
@@ -27,8 +31,9 @@ with the router in notes/urls.py are available under the api/ prefix:
     http://127.0.0.1:8000/api/categories/{id}/
     
 """
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('notes.urls')),
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'), # api auth token url path
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'), 
 ]

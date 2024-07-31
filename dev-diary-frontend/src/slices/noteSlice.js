@@ -10,6 +10,13 @@ export const fetchNotes = createAsyncThunk('notes/fetchNotes', async () => {
   return response.data;
 });
 
+// create an asynchronous thunk action for adding a note
+export const addNote = createAsyncThunk('notes/addNote', async (note) => {
+  // make a POST request to the API to add a new note
+  const response = await axios.post('http://127.0.0.1:8000/api/notes/', note);
+  return response.data; 
+});
+
 /* createSlice combines reducers, actions, and initial state in one place */
 const noteSlice = createSlice({
   name: 'notes',
@@ -34,6 +41,9 @@ const noteSlice = createSlice({
       .addCase(fetchNotes.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
+      })
+      .addCase(addNote.fulfilled, (state, action) => {
+        state.notes.push(action.payload); // Add new note to notes state
       });
   },
 });

@@ -9,6 +9,7 @@ class CategoryViewSet(viewsets.ModelViewSet):
     ## query all category objects
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+    
 
 class NoteViewSet(viewsets.ModelViewSet):
     queryset = Note.objects.all()
