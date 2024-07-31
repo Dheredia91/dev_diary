@@ -17,6 +17,12 @@ export const addNote = createAsyncThunk('notes/addNote', async (note) => {
   return response.data; 
 });
 
+// Asynchronous thunk action for deleting a note
+export const deleteNote = createAsyncThunk('notes/deleteNote', async (id) => {
+  await axiosInstance.delete(`notes/${id}/`);
+  return id;
+});
+
 /* createSlice combines reducers, actions, and initial state in one place */
 const noteSlice = createSlice({
   name: 'notes',
@@ -44,6 +50,9 @@ const noteSlice = createSlice({
       })
       .addCase(addNote.fulfilled, (state, action) => {
         state.notes.push(action.payload); 
+      })
+      .addCase(deleteNote.fulfilled, (state, action) => {
+        state.notes = state.notes.filter(note => note.id !== action.payload);
       });
   },
 });

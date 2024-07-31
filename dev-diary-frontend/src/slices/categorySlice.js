@@ -14,6 +14,12 @@ export const addCategory = createAsyncThunk('categories/addCategory', async (cat
   return response.data;
 });
 
+// Asynchronous thunk action for deleting a category
+export const deleteCategory = createAsyncThunk('categories/deleteCategory', async (id) => {
+  await axiosInstance.delete(`categories/${id}/`);
+  return id;
+});
+
 const categorySlice = createSlice({
   name: 'categories',
   initialState: {
@@ -38,6 +44,9 @@ const categorySlice = createSlice({
       })
       .addCase(addCategory.fulfilled, (state, action) => {
         state.categories.push(action.payload);
+      })
+      .addCase(deleteCategory.fulfilled, (state, action) => {
+        state.categories = state.categories.filter(category => category.id !== action.payload);
       });
   },
 });

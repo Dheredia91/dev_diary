@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchNotes } from '../slices/noteSlice';
+import { fetchNotes, deleteNote  } from '../slices/noteSlice';
 import AddNote from './AddNote';
 
 const Notes = () => {
@@ -14,6 +14,10 @@ const Notes = () => {
   useEffect(() => {
     dispatch(fetchNotes());
   }, [dispatch]);
+
+  const handleDelete = (id) => {
+    dispatch(deleteNote(id));
+  };
 
   if (loading){
     return <p>Loading...</p>;
@@ -33,6 +37,7 @@ const Notes = () => {
             <h2>{note.title}</h2>
             <p>{note.content}</p>
             <p>Category: {note.category_name}</p>
+            <button onClick={() => handleDelete(note.id)}>Delete</button>
           </li>
         ))}
       </ul>
