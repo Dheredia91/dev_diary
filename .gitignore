@@ -21,3 +21,6 @@ media/
 
 # Ignore logs
 *.log
+
+#Ignore pem files
+*.pem
