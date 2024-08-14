@@ -13,15 +13,20 @@ const AddCategory = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        placeholder="Category Name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        required
-      />
-      <button type="submit">Add Category</button>
+    <form onSubmit={handleSubmit} id="add-category-form">
+      <div className="form-group">
+        <label htmlFor="categoryName">Category Name</label>
+        <input
+          type="text"
+          className="form-control"
+          id="categoryName"
+          placeholder="Enter category name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+        />
+      </div>
+      <button type="submit" className="btn btn-primary" style={{ display: 'none' }}>Add Category</button>
     </form>
   );
 };

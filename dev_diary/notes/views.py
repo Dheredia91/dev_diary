@@ -3,7 +3,7 @@ from .models import Note, Category
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from .serializers import NoteSerializer, CategorySerializer, RegisterSerializer
 
 # ModelViewSet is a type of viewset that provides default
@@ -28,6 +28,7 @@ class NoteViewSet(viewsets.ModelViewSet):
 
 class RegisterViewSet(generics.CreateAPIView):
     serializer_class = RegisterSerializer
+    permission_classes = [AllowAny]
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
